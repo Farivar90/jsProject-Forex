@@ -177,6 +177,21 @@ aboutButton.addEventListener('click', showAboutModal);
 const closeButton = document.getElementById('close-button');
 closeButton.addEventListener('click', hideAboutModal);
 
+function showSessionModal() {
+  const sessionModalContainer = document.getElementById('session-modal-container');
+  sessionModalContainer.style.display = 'block';
+}
+
+function hideSessionModal() {
+  const sessionModalContainer = document.getElementById('session-modal-container');
+  sessionModalContainer.style.display = 'none';
+}
+
+const aboutSessionImage = document.getElementById('about-session');
+aboutSessionImage.addEventListener('click', showSessionModal);
+
+const sessionCloseButton = document.getElementById('session-close-button');
+sessionCloseButton.addEventListener('click', hideSessionModal);
 
 
 
