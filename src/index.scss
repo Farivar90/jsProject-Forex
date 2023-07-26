@@ -125,7 +125,23 @@ align-items: center;
     transform: scale(1.20, 1.20);
   }
 
+  #next-music:hover {
+    transform: scale(1.20, 1.20);
+  }
+
   #next-music{
+    background-color: rgb(30, 233, 7);
+    color: rgb(0, 10, 10);
+    border-radius: 2em;
+    cursor: pointer;
+    position: fixed;
+  }
+
+  #previous-music:hover {
+    transform: scale(1.20, 1.20);
+  }
+
+  #previous-music{
     background-color: rgb(30, 233, 7);
     color: rgb(0, 10, 10);
     border-radius: 2em;
@@ -182,3 +198,16 @@ align-items: center;
     height: 45px;
     cursor: pointer;
   }
+  #about-button:hover{
+    color: yellow;
+  }
+
+#about-session{
+  width: 500px;
+  cursor: pointer;
+  padding: 50px;
+}
+
+#about-session:hover{
+  transform: scale(1.5);
+}

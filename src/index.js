@@ -2,8 +2,9 @@ import { Chart } from "chart.js/auto";
 import Music  from "./music.js";
 
 
-
+// const apiKey = process.env.API_KEY;
 const apiKey = "f41a980b1e5d6ab7d3d45fe4";
+
 const chartCanvas = document.getElementById("forexChart").getContext("2d");
 
 async function fetchExchangeRates(baseCurrency) {
@@ -152,6 +153,11 @@ async function startApp() {
   const nextMusicButton = document.getElementById('next-music');
   nextMusicButton.addEventListener('click', () => {
     music.nextMusic();
+  });
+
+  const previousMusicButton = document.getElementById('previous-music');
+  previousMusicButton.addEventListener('click', () => {
+    music.previousMusic();
   });
 }
 

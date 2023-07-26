@@ -32,6 +32,15 @@ class Music {
       this.songs[this.currentSongIndex].play();
       this.playing = true;
     }
+
+    previousMusic() {
+      this.songs[this.currentSongIndex].pause();
+      this.playing = false;
+      this.currentSongIndex =
+        (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+      this.songs[this.currentSongIndex].play();
+      this.playing = true;
+    }
   }
   
   export default Music;
