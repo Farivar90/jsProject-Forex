@@ -1,0 +1,4 @@
+<h1>User Index</h1>
+<% @users.each do |user| %>
+  <%= render 'banana', peach: user, action: :index %>
+<% end %>

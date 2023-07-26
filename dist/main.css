@@ -1,0 +1,179 @@
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+.profile-links {
+  position: fixed;
+  left: 1%;
+  top: 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.click {
+  cursor: pointer;
+}
+
+.fa-brands {
+  color: #eee;
+  font-size: 3em;
+  transition: color 0.5s ease-in-out;
+}
+
+.fa-github {
+  top: 8%;
+}
+
+.fa-linkedin {
+  top: 14%;
+}
+
+.fa-brands:hover {
+  color: rgb(248, 237, 137); /* change color on hover */
+}
+
+h1 {
+  color: rgb(21, 87, 3);
+  font-size: 70px;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  padding: 50px;
+}
+
+h2 {
+  color: rgb(0, 154, 21);
+  font-size: 40px;
+  text-align: center;
+  font-family: serif;
+  padding: 50px;
+}
+
+body {
+  background-color: rgb(0, 0, 0);
+  justify-content: center;
+}
+
+#update-elements {
+  color: greenyellow;
+  padding: 40px;
+}
+
+.currency-pair {
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+  text-align: center;
+  font-family: serif;
+  padding: 30px;
+}
+
+#select-base {
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px;
+  background-color: green;
+}
+
+#moving-average-period {
+  color: greenyellow;
+  padding: 40px;
+}
+
+.base {
+  color: rgb(0, 84, 18);
+  font-size: 30px;
+  text-align: center;
+  font-family: serif;
+  padding: 30px;
+}
+
+canvas {
+  background-image: url("../Fff.jpeg");
+  background-size: 100% auto;
+}
+
+.time-map {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#best-time {
+  width: 780px;
+}
+
+.music {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+#music-toggle {
+  background-color: rgb(30, 233, 7);
+  color: rgb(0, 10, 10);
+  border-radius: 2em;
+  cursor: pointer;
+  position: fixed;
+}
+
+#music-toggle:hover {
+  transform: scale(1.2, 1.2);
+}
+
+#next-music {
+  background-color: rgb(30, 233, 7);
+  color: rgb(0, 10, 10);
+  border-radius: 2em;
+  cursor: pointer;
+  position: fixed;
+}
+
+.change-music {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+/* Style for modal container */
+.modal-container {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Style for modal content */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 600px;
+}
+
+/* Style for close button */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: black;
+}
+
+#about-button {
+  height: 45px;
+  cursor: pointer;
+}

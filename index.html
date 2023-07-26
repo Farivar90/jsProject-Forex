@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="./dist/main.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/2687a23fd5.js" crossorigin="anonymous"></script>
+    <script src="./dist/main.js" defer>  </script>
+    <title>Forex Data Visualization by F.A Financial Department</title>
+    </head>
+    
+  <body>
+
+    <div class="music">
+      <button id="music-toggle">Music On/Off</button>
+    </div>
+    <div class="change-music">
+      <button id="next-music">Next Music</button>
+    </div>
+
+
+    <header>
+      <div class="profile-links">
+        <a class="github-links" href="https://github.com/Farivar90" ><i class="fa-brands fa-github"></i></a>
+        <a class="linkedin-links" href="https://linkedin.com/in/farivar-amiri-458273198" ><i class="fa-brands fa-linkedin"></i></a>
+        <!-- <button id="about-button">About Me / Project Info</button> -->
+        <img id="about-button" src="./information-icon-symbol-sign-vector.jpg" alt="">
+      </div>
+
+      <div id="modal-container" class="modal-container">
+        <div class="modal-content">
+          <span class="close-button" id="close-button">&times;</span>
+          <!-- Content for About Me / Project Info goes here -->
+          <h2>About Me</h2>
+          <p>Hello! I'm Farivar Amiri, and I am a developer and financial enthusiast. 
+            I created this project, "Forex Data Visualization by F.A Financial CORP," to combine my interests 
+            in finance and web development. 
+            With a background in both fields, I aim to provide an interactive and informative 
+            experience for traders and anyone interested in Forex exchange rates.
+            <br>
+            As a developer, I always strive to build user-friendly and visually appealing web applications. 
+            This project has given me the opportunity to leverage my skills in HTML, CSS, JavaScript,
+             and data visualization libraries like Chart.js to create an engaging Forex data visualization tool.
+             I am continually working on enhancing the project and incorporating new features to make it more valuable for users.</p>
+      
+          <h2>Project Info</h2>
+          <p>Project Name: Forex Data Visualization by F.A Financial CORP <br>
+            Version: 1.0 beta (people like this kind of name, they think it will be something big soon :-)) <br>
+            <br>
+            <br>
+            Description: <br>
+            Forex Data Visualization by F.A Financial CORP is a web-based 
+            application that allows users to visualize historical exchange rates for various currency pairs. <br>
+             The project provides traders and financial enthusiasts with an 
+             interactive chart to analyze and compare currency trends over specific time frames.
+              It allows users to select different currency pairs, set start and end dates for analysis, 
+              and even calculate moving averages for better insights into the market. <br>
+             <br>
+             <br>
+            Key Features: <br>
+            <br>
+            Forex Exchange Rate Chart: 
+            The application displays a bar chart with exchange rates of selected currency pairs against a base currency,
+             providing a clear view of the currency market trends. <br>
+            <br>
+            Date Range Selection:
+             Users can specify start and end dates to view historical exchange rate data for specific time frames. <br>
+            <br>
+            Moving Average Calculation: 
+            The project includes a feature to calculate moving averages for the selected currency pairs,
+             aiding users in identifying potential trends and patterns. <br>
+            <br>
+            Music Player:
+             For a more enjoyable experience, 
+             the project incorporates a music player that allows users to play and pause background music. <br>
+            <br>
+            Responsive Design: 
+            The application is designed to be responsive,
+             ensuring a seamless experience on various devices, including desktops, tablets, and mobile phones. <br>
+            <br>
+            Future Enhancements: <br>
+            As the project evolves, 
+            I plan to introduce additional features and improvements to enhance its functionality and user experience.
+             Some of the future enhancements include: <br>
+        
+            Live Forex Data:
+             Implementing real-time exchange rate data to enable users to analyze the most up-to-date market trends. <br>
+            
+            Additional Technical Indicators: 
+            Introducing more technical indicators to aid traders in making informed decisions. <br>
+            
+            User Accounts: 
+            Creating user accounts to save preferences and customizations. <br>
+            
+            User-Friendly Interface: 
+            Continuously refining the user interface for easier navigation and interaction. <br>
+            
+            I hope you find this project helpful and insightful for your Forex analysis needs.
+             Your feedback and suggestions are always welcome as I work to make this project even better! 
+             Thank you for visiting "Forex Data Visualization by F.A Financial CORP."
+          </p>
+        </div>
+      </div>
+
+      <!-- <%= render 'sessions/new' %>
+      <%= render 'users/new' %> -->
+
+    </header>
+    <h1>Forex Data Visualization by F.A Financial Department</h1>
+    <div class="time-map" >
+      <script type="text/javascript">DukascopyApplet = {"type":"fxmarkethours","params":{"showHeader":true,"displayMainMenu":true,"displayTimezoneChange":true,"displayInstrumentChange":true,"displaySpreadIndicator":true,"displayVolumeIndicator":true,"displayVolatilityIndicator":true,"displayFollowButton":true,"allowTimezoneChange":true,"allowInstrumentChange":true,"defaultTimezone":0,"showIndicator":"0","defaultFollowMode":false,"worldMapColor":"red","hoursBackground":"#444f5f","hoursActiveBackground":"#7d92b0","hoursTextColor":"#ffffff","currentHourBGColor":"#f9fdff","dstHourColor":"#0cf6ff","indicatorBarColor":"#5090c6","graphPointsColor":"#ffffff","spreadTopGraphColor":"#208c1c","spreadBottomGraphColor":"#dc0e0e","volatilityGraphColor":"#146fba","availableInstruments":"l:","instrument":"EUR/USD","width":"773","height":"481","adv":"popup","lang":"en"}};</script><script type="text/javascript" src="https://freeserv-static.dukascopy.com/2.0/core.js"></script>
+      <img id="best-time" src="./best-time.webp" alt="">
+    </div>
+    
+    <h2>Welcome Trader</h2>
+   
+
+    <div id="update-elements">
+      <label for="start-date">Start Date:</label>
+      <input class="click" type="date" id="start-date">
+      <label for="end-date">End Date:</label>
+      <input class="click" type="date" id="end-date">
+      <label for="currency-pair">Select Currency Pair:</label>
+      <select class="click" id="currency-pair">
+        <option value="EURUSD">EUR/USD</option>
+        <option value="GBPUSD">GBP/USD</option>
+        <option value="USDJPY">USD/JPY</option>
+        <option value="USDCAD">USD/CAD</option>
+        <option value="USDCHF">USD/CHF</option>
+        <option value="AUDUSD">AUD/USD</option>
+      </select>
+      <button class="click" onclick="updateChart()">Update Chart</button>
+    </div>
+
+    <div id="moving-average-period">
+     <label for="moving-average-period-box">Moving Average Period:</label>
+       <input type="number" id="moving-average-period-box" min="1" max="30" value="5">
+       <button class="click" onclick="calculateMovingAverage()">Update Moving Average</button>
+    </div>
+    
+    <div class="base">
+      <label for="select-base">Select Base Currency:</label>
+      <select class="click" id="select-base"  onchange="selectBase()">
+       <option value="USD">USD</option>
+       <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="JPY">JPY</option>
+        <option value="CAD">CAD</option>
+        <option value="CHF">CHF</option>
+       <option value="AUD">AUD</option>
+     </select>
+    </div>
+
+
+    <div style="width: 100%; height: 800px; max-width: 1800px; margin: 0 auto;">
+      <canvas id="forexChart"></canvas>
+    </div>
+  
+  </body>
+
+</html>
