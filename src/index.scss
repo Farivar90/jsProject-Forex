@@ -118,7 +118,6 @@ align-items: center;
 #music-toggle,
 #next-music,
 #previous-music {
-  /* Common button styles */
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
   transition: color 0.5s ease-in-out;
@@ -131,7 +130,6 @@ align-items: center;
 #music-toggle:hover,
 #next-music:hover,
 #previous-music:hover {
-  /* Common button hover styles */
   transform: scale(1.2);
   background-color: rgb(21, 87, 3);
   transition: color 0.5s ease-in-out;
@@ -140,7 +138,7 @@ align-items: center;
 
 
 
-  /* Style for modal container */
+
 .modal-container {
     display: none;
     position: fixed;
@@ -153,7 +151,7 @@ align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
   }
   
-  /* Style for modal content */
+
   .modal-content {
     background-color: #fff;
     margin: 10% auto;
@@ -162,7 +160,7 @@ align-items: center;
     max-width: 600px;
   }
   
-  /* Style for close button */
+ 
   .close-button {
     color: #aaa;
     float: right;
@@ -204,4 +202,20 @@ h3{
 
 #hours{
   width: 600px;
+}
+
+#language-toggle{
+  background-color:#eee;
+  color: rgb(0, 0, 0);
+  left: 01%;
+  top: 0%;
+  height: 40px;
+  cursor: pointer;
+  position: fixed;
+  font-style:oblique;
+}
+
+#language-toggle:hover{
+  background-color: rgb(21, 87, 3);
+  transition: color 0.5s ease-in-out;
 }

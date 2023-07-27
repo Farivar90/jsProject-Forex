@@ -27,9 +27,9 @@
 
 
     <header>
-      <!-- <div>
-        <button id="language-toggle">Change Language</button>
-      </div> -->
+      <div>
+        <button id="language-toggle">En/Fa</button>
+      </div>
 
       <div class="profile-links">
         <a class="github-links" href="https://github.com/Farivar90" ><i class="fa-brands fa-github"></i></a>
@@ -40,8 +40,8 @@
       <div id="modal-container" class="modal-container">
         <div class="modal-content">
           <span class="close-button" id="close-button">&times;</span>
-          <h2>About Me</h2>
-          <p>Hello! I'm Farivar Amiri, and I am a developer and financial enthusiast. 
+          <h2 id="about-me-head" >About Me</h2>
+          <p id="about-me" >Hello! I'm Farivar Amiri, and I am a developer and financial enthusiast. 
             I created this project, "Forex Data Visualization by F.A Financial CORP," to combine my interests 
             in finance and web development. 
             With a background in both fields, I aim to provide an interactive and informative 
@@ -52,8 +52,8 @@
              and data visualization libraries like Chart.js to create an engaging Forex data visualization tool.
              I am continually working on enhancing the project and incorporating new features to make it more valuable for users.</p>
       
-          <h2>Project Info</h2>
-          <p>Project Name: Forex Data Visualization by F.A Financial CORP <br>
+          <h2 id="project-info-head" >Project Info</h2>
+          <p id="project-info" >Project Name: Forex Data Visualization by F.A Financial CORP <br>
             Version: 1.0 beta (people like this kind of name, they think it will be something big soon :-)) <br>
             <br>
             <br>
@@ -115,7 +115,7 @@
       <%= render 'users/new' %> -->
 
     </header>
-    <h1>Forex Data Visualization by F.A Financial Department</h1>
+    <h1 id="fdv-fd" >Forex Data Visualization by F.A Financial Department</h1>
     <div class="time-map" >
       <script type="text/javascript">DukascopyApplet = {"type":"fxmarkethours","params":{"showHeader":true,"displayMainMenu":true,"displayTimezoneChange":true,"displayInstrumentChange":true,"displaySpreadIndicator":true,"displayVolumeIndicator":true,"displayVolatilityIndicator":true,"displayFollowButton":true,"allowTimezoneChange":true,"allowInstrumentChange":true,"defaultTimezone":0,"showIndicator":"0","defaultFollowMode":false,"worldMapColor":"red","hoursBackground":"#444f5f","hoursActiveBackground":"#7d92b0","hoursTextColor":"#ffffff","currentHourBGColor":"#f9fdff","dstHourColor":"#0cf6ff","indicatorBarColor":"#5090c6","graphPointsColor":"#ffffff","spreadTopGraphColor":"#208c1c","spreadBottomGraphColor":"#dc0e0e","volatilityGraphColor":"#146fba","availableInstruments":"l:","instrument":"EUR/USD","width":"773","height":"481","adv":"popup","lang":"en"}};</script><script type="text/javascript" src="https://freeserv-static.dukascopy.com/2.0/core.js"></script>
       <img id="best-time" src="./best-time.webp" alt="">
@@ -125,7 +125,7 @@
     <div id="session-modal-container" class="modal-container">
       <div class="modal-content">
         <span class="close-button" id="session-close-button">&times;</span>
-        <h2>Forex Trading Sessions</h2>
+        <h2 id="trading-session" >Forex Trading Sessions</h2>
         <p>
           You can make money trading when the market moves up, and you can even make money when the market moves down. <br>
           BUT you will have a very difficult time trying to make money when the market doesn’t move at all.
@@ -179,15 +179,15 @@
       </div>
     </div>
     
-    <h2>Welcome Trader</h2>
+    <h2 id="welcome" >Welcome Trader</h2>
    
 
     <div id="update-elements">
-      <label for="start-date">Start Date:</label>
+      <label id="start-d" for="start-date">Start Date:</label>
       <input class="click" type="date" id="start-date">
-      <label for="end-date">End Date:</label>
+      <label id="end-d" for="end-date">End Date:</label>
       <input class="click" type="date" id="end-date">
-      <label for="currency-pair">Select Currency Pair:</label>
+      <label id="c-pair" for="currency-pair">Select Currency Pair:</label>
       <select class="click" id="currency-pair">
         <option value="EURUSD">EUR/USD</option>
         <option value="GBPUSD">GBP/USD</option>
@@ -196,17 +196,17 @@
         <option value="USDCHF">USD/CHF</option>
         <option value="AUDUSD">AUD/USD</option>
       </select>
-      <button class="click" onclick="updateChart()">Update Chart</button>
+      <button id="update-ch" class="click" onclick="updateChart()">Update Chart</button>
     </div>
 
     <div id="moving-average-period">
-     <label for="moving-average-period-box">Moving Average Period:</label>
+     <label id="m-a-p" for="moving-average-period-box">Moving Average Period:</label>
        <input type="number" id="moving-average-period-box" min="1" max="30" value="5">
-       <button class="click" onclick="calculateMovingAverage()">Update Moving Average</button>
+       <button id="u-m-a" class="click" onclick="calculateMovingAverage()">Update Moving Average</button>
     </div>
     
     <div class="base">
-      <label for="select-base">Select Base Currency:</label>
+      <label id="s-b" for="select-base">Select Base Currency:</label>
       <select class="click" id="select-base"  onchange="selectBase()">
        <option value="USD">USD</option>
        <option value="EUR">EUR</option>
