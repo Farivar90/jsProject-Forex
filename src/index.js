@@ -2,6 +2,8 @@ import { Chart } from "chart.js/auto";
 import Music  from "./music.js";
 
 
+const backendServerUrl = 'http://localhost:5001';
+
 // const apiKey = process.env.API_KEY;
 const apiKey = "5a18964394c03fc2da032a8c";
 
@@ -109,15 +111,27 @@ async function updateChartWithBaseCurrency(baseCurrency) {
   }
 }
 
-async function fetchExchangeRatesWithTimeframe(
-  baseCurrency,
-  startDate,
-  endDate
-) {
+// async function fetchExchangeRatesWithTimeframe(
+//   baseCurrency,
+//   startDate,
+//   endDate
+// ) {
+//   try {
+//     const response = await fetch(
+//       `https://v6.exchangerate-api.com/v6/${apiKey}/history/${baseCurrency}/${startDate}/${endDate}`
+//     );
+//     const data = await response.json();
+//     return data.rates;
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return null;
+//   }
+// }
+
+
+async function fetchExchangeRatesWithTimeframe(baseCurrency, startDate, endDate) {
   try {
-    const response = await fetch(
-      `https://v6.exchangerate-api.com/v6/${apiKey}/history/${baseCurrency}/${startDate}/${endDate}`
-    );
+    const response = await fetch(`${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/${apiKey}/history/${baseCurrency}/${startDate}/${endDate}`);
     const data = await response.json();
     return data.rates;
   } catch (error) {
@@ -193,6 +207,15 @@ aboutSessionImage.addEventListener('click', showSessionModal);
 const sessionCloseButton = document.getElementById('session-close-button');
 sessionCloseButton.addEventListener('click', hideSessionModal);
 
+
+// function toggleLanguage() {
+//   currentLanguage = currentLanguage === 'en' ? 'fa' : 'en';
+//   updateLanguageContent();
+// }
+
+
+// const languageToggle = document.getElementById('language-toggle');
+// languageToggle.addEventListener('click', toggleLanguage);
 
 
 // Call the startApp function when the page loads
