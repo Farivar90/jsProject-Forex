@@ -53,6 +53,7 @@ function renderChart(data, baseCurrency) {
   };
 
   const existingChart = chartCanvas.chart;
+  console.log(chartCanvas);
   if (existingChart) {
     existingChart.data = chartData;
     existingChart.options = chartOptions;
@@ -132,9 +133,11 @@ async function updateChartWithBaseCurrency(baseCurrency) {
 
 async function fetchExchangeRatesWithTimeframe(baseCurrency, startDate, endDate) {
   try {
-    const response = await fetch(`${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/${apiKey}/history/${baseCurrency}/${startDate}/${endDate}`);
+    // const response = await fetch(`${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/${apiKey}/history/${baseCurrency}/${startDate}/${endDate}`);
+    const response = await fetch(`${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/${apiKey}/history/USD/2022/12/11`);
     const data = await response.json();
-    return data.rates;
+    console.log(data);
+    return data.conversion_rates;
   } catch (error) {
     console.error("Error fetching data:", error);
     return null;
