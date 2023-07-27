@@ -110,19 +110,21 @@ align-items: center;
 .music {
     padding: 10px;
     display: flex;
-    flex-direction: row;
     justify-content: end;
   }
 
   #music-toggle {
-    background-color: rgb(30, 233, 7);
-    color: rgb(0, 10, 10);
-    border-radius: 2em;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    height: 40px;
     cursor: pointer;
     position: fixed;
+    margin: 20px;
+    justify-content: end;
   }
   #music-toggle:hover {
     transform: scale(1.20, 1.20);
+    background-color: #fff;
   }
 
   #next-music:hover {
@@ -130,11 +132,13 @@ align-items: center;
   }
 
   #next-music{
-    background-color: rgb(30, 233, 7);
-    color: rgb(0, 10, 10);
-    border-radius: 2em;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    height: 40px;
     cursor: pointer;
     position: fixed;
+    margin: 20px;
+    justify-content: end;
   }
 
   #previous-music:hover {
@@ -142,17 +146,18 @@ align-items: center;
   }
 
   #previous-music{
-    background-color: rgb(30, 233, 7);
-    color: rgb(0, 10, 10);
-    border-radius: 2em;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    height: 40px;
     cursor: pointer;
     position: fixed;
+    margin: 20px;
+    justify-content: end;
   }
 
   .change-music {
     padding: 10px;
     display: flex;
-    flex-direction: row;
     justify-content: end;
   }
 
