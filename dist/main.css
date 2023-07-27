@@ -17,7 +17,6 @@
 .fa-brands {
   color: #eee;
   font-size: 3em;
-  transition: color 0.5s ease-in-out;
 }
 
 .fa-github {
@@ -29,7 +28,7 @@
 }
 
 .fa-brands:hover {
-  color: rgb(248, 237, 137); /* change color on hover */
+  color: rgb(21, 87, 3); /* change color on hover */
 }
 
 h1 {
@@ -109,6 +108,7 @@ canvas {
   display: flex;
   justify-content: flex-end; /* Align buttons to the right end of the container */
   gap: 10px; /* Add some space between the buttons */
+  transition: color 0.5s ease-in-out;
 }
 
 #music-toggle,
@@ -117,6 +117,7 @@ canvas {
   /* Common button styles */
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
+  transition: color 0.5s ease-in-out;
   height: 40px;
   cursor: pointer;
   position: fixed;
@@ -128,53 +129,8 @@ canvas {
 #previous-music:hover {
   /* Common button hover styles */
   transform: scale(1.2);
-  background-color: #fff;
-}
-
-#music-toggle {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-  height: 40px;
-  cursor: pointer;
-  position: fixed;
-  margin: 20px;
-  justify-content: end;
-}
-
-#music-toggle:hover {
-  transform: scale(1.2, 1.2);
-  background-color: #fff;
-}
-
-#next-music:hover {
-  transform: scale(1.2, 1.2);
-  background-color: #fff;
-}
-
-#next-music {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-  height: 40px;
-  cursor: pointer;
-  position: fixed;
-  margin: 20px;
-  justify-content: end;
-  justify-content: space-around;
-}
-
-#previous-music:hover {
-  transform: scale(1.2, 1.2);
-  background-color: #fff;
-}
-
-#previous-music {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-  height: 40px;
-  cursor: pointer;
-  position: fixed;
-  margin: 20px;
-  justify-content: end;
+  background-color: rgb(21, 87, 3);
+  transition: color 0.5s ease-in-out;
 }
 
 /* Style for modal container */
@@ -215,10 +171,15 @@ canvas {
 #about-button {
   height: 45px;
   cursor: pointer;
+  background-color: #eee;
+  border-radius: 2em;
+  transition: color 0.5s ease-in-out;
 }
 
 #about-button:hover {
-  color: yellow;
+  color: rgb(21, 87, 3);
+  background-color: rgb(21, 87, 3);
+  transition: color 0.5s ease-in-out;
 }
 
 #about-session {
