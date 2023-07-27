@@ -289,7 +289,8 @@ const languageContent = {
       updateChart: "Update Chart",
       movingAveragePeriod: "Moving Average Period:",
       updateMovingAverage: "Update Moving Average",
-      selectBaseCurrency: "Select Base Currency:"
+      selectBaseCurrency: "Select Base Currency:",
+      fMaC: "For more accurate charts which update every second please go to:"
   },
   fa: {
       aboutMeHead: "درباره ی من",
@@ -367,7 +368,8 @@ const languageContent = {
       updateChart: "بروزرسانی نمودار",
       movingAveragePeriod: "دوره ی موینگ اوریج:",
       updateMovingAverage: "بروزرسانی موینگ اوریج",
-      selectBaseCurrency: "انتخاب ارز پایه:"
+      selectBaseCurrency: "انتخاب ارز پایه:",
+      fMaC: "برای دسترسی به چارت های دقیق تر که هر ثانیه تغببر میکنند به آدرس زیر بروید:"
   }
 };
 
@@ -383,6 +385,7 @@ function updateLanguageContent() {
   document.getElementById('project-info-head').textContent = content.projectInfoHead;
   document.getElementById('fdv-fd').textContent = content.fdvFd;
   document.getElementById('welcome').textContent = content.welcome;
+  document.getElementById('trading-session').textContent = content.tradingSession;
   document.getElementById('start-d').textContent = content.startDate;
   document.getElementById('end-d').textContent = content.endDate;
   document.getElementById('c-pair').textContent = content.cPair;
@@ -390,6 +393,7 @@ function updateLanguageContent() {
   document.getElementById('m-a-p').textContent = content.movingAveragePeriod;
   document.getElementById('u-m-a').textContent = content.updateMovingAverage;
   document.getElementById('s-b').textContent = content.selectBaseCurrency;
+  document.getElementById('fmac').textContent = content.fMaC;
 }
 
 
