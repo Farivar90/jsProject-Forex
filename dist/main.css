@@ -196,3 +196,7 @@ h3 {
   color: rgb(160, 0, 0);
   font-size: 20px;
 }
+
+#hours {
+  width: 600px;
+}
