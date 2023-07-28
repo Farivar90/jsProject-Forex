@@ -1,5 +1,5 @@
 import { Chart } from "chart.js/auto";
-import Music  from "./music.js";
+import Music  from "./scripts/music";
 
 
 
