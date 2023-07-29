@@ -1,171 +1,349 @@
-import { Chart } from "chart.js/auto";
+import * as topojson from "topojson";
+import * as d3 from "d3";
 import Music  from "./scripts/music";
 
-
-
 const backendServerUrl = 'http://localhost:5001';
+let width = 1000;
+let height = 800;
+let svg = d3.select("body")
+    .append("svg")
+    .attr("width", width) 
+    .attr("height", height) 
+    .append("g");
 
-// const apiKey = process.env.API_KEY;
-const apiKey = "5a18964394c03fc2da032a8c";
+let projection = d3.geoMercator()
+    .scale(150) 
+    .translate([width / 2, height / 2]);
 
-const chartCanvas = document.getElementById("forexChart").getContext("2d");
+let path = d3.geoPath().projection(projection);
+let color = d3.scaleQuantize().range(d3.schemeCategory10);
 
-async function fetchExchangeRates(baseCurrency) {
-  try {
-    const response = await fetch(
-      `https://v6.exchangerate-api.com/v6/${apiKey}/latest/${baseCurrency}`
-    );
-    const data = await response.json();
-    return data.conversion_rates;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
+const tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+let countryToCurrency = {
+  'United States of America': 'USD',
+  'Australia': 'AUD',
+  'Bulgaria': 'BGN',
+  'Canada': 'CAD',
+  'Switzerland': 'CHF',
+  'China': 'CNY',
+  'Egypt': 'EGP',
+  'Eurozone': 'EUR',
+  'United Kingdom': 'GBP',
+  'Iran': 'IRR',
+  'Trinidad and Tobago': 'TTD', 
+  'S. Sudan': 'SSP', 
+  'Eritrea': 'ERN',
+  'Japan': 'JPY',
+  'Paraguay': 'PYG',
+  'Yemen': 'YER',
+  'Saudi Arabia': 'SAR',
+  'Antarctica': 'N/A', // Antarctica is not a country and does not have a standard currency
+  'N. Cyprus': 'TRY', // Northern Cyprus uses Turkish Lira
+  'Cyprus': 'EUR',
+  'Morocco': 'MAD',
+  'Libya': 'LYD',
+  'Ethiopia': 'ETB',
+  'Djibouti': 'DJF',
+  'Somaliland': 'SLS', // Somaliland uses Somaliland shilling, not officially recognized
+  'Uganda': 'UGX',
+  'Rwanda': 'RWF',
+  'Bosnia and Herz.': 'BAM',
+  'Macedonia': 'MKD',
+  'Serbia': 'RSD',
+  'Montenegro': 'EUR',
+  'Kosovo': 'EUR',
+  'Trinidad and Tobago': 'TTD',
+  'S. Sudan': 'SSP',
+  "Hungary": "HUF",
+  "Moldova": "MDL",
+  "Romania": "RON",
+  "Lithuania": "EUR",
+  "Latvia": "EUR",
+  "Estonia": "EUR",
+  "Germany": "EUR",
+  "Greece": "EUR",
+  "Turkey": "TRY",
+  "Albania": "ALL",
+  "Croatia": "HRK",
+  "Luxembourg": "EUR",
+  "Belgium": "EUR",
+  "Netherlands": "EUR",
+  "Portugal": "EUR",
+  "Spain": "EUR",
+  "Ireland": "EUR",
+  "New Caledonia": "XPF",
+  "Solomon Is.": "SBD",
+  "New Zealand": "NZD",
+  "Sri Lanka": "LKR",
+  "Taiwan": "TWD",
+  "Italy": "EUR",
+  "Denmark": "DKK",
+  "Iceland": "ISK",
+  "Azerbaijan": "AZN",
+  "Georgia": "GEL",
+  "Philippines": "PHP",
+  "Malaysia": "MYR",
+  "Brunei": "BND",
+  "Slovenia": "EUR",
+  "Finland": "EUR",
+  "Norway": "NOK",
+  "Sweden": "SEK",
+  "Russia": "RUB",
+  "Poland": "PLN",
+  "Czech Rep.": "CZK",
+  "Switzerland": "CHF",
+  "France": "EUR",
+  "Austria": "EUR",
+  "UK": "GBP",
+  "Cyprus": "EUR",
+  "Malta": "EUR",
+  "Bosnia and Herz.": "BAM",
+  "Serbia": "RSD",
+  "Montenegro": "EUR",
+  "Kosovo": "EUR",
+  "Trinidad and Tob.": "TTD",
+  "Ecuador": "USD",
+  "Peru": "PEN",
+  "Colombia": "COP",
+  "Venezuela": "VES",
+  "Guyana": "GYD",
+  "Brazil": "BRL",
+  "Suriname": "SRD",
+  "Bolivia": "BOB",
+  "Paraguay": "PYG",
+  "Chile": "CLP",
+  "Argentina": "ARS",
+  "Uruguay": "UYU",
+  "Falkland Is.": "FKP",
+  'Jordan': 'JOD',
+  'United Arab Emirates': 'AED',
+  'Qatar': 'QAR',
+  'Kuwait': 'KWD',
+  'Iraq': 'IQD',
+  'Oman': 'OMR',
+  'Vanuatu': 'VUV',
+  'Cambodia': 'KHR',
+  'Thailand': 'THB',
+  'Laos': 'LAK',
+  'Myanmar': 'MMK',
+  'Vietnam': 'VND',
+  'North Korea': 'KPW',
+  'South Korea': 'KRW',
+  'Mongolia': 'MNT',
+  'India': 'INR',
+  'Bangladesh': 'BDT',
+  'Bhutan': 'BTN',
+  'Nepal': 'NPR',
+  'Pakistan': 'PKR',
+  'Afghanistan': 'AFN',
+  'Tajikistan': 'TJS',
+  'Kyrgyzstan': 'KGS',
+  'Turkmenistan': 'TMT',
+  'Syria': 'SYP',
+  'Armenia': 'AMD',
+  'Sweden': 'SEK',
+  'Belarus': 'BYN',
+  'Ukraine': 'UAH',
+  'Poland': 'PLN',
+  'Austria': 'AUD',
+  'Benin': 'XOF', // West African CFA franc
+  'Niger': 'XOF', // West African CFA franc
+  'Nigeria': 'NGN', // Nigerian Naira
+  'Cameroon': 'XAF', // Central African CFA franc
+  'Togo': 'XOF', // West African CFA franc
+  'Ghana': 'GHS', // Ghanaian Cedi
+  'Côte d\'Ivoire': 'XOF', // West African CFA franc
+  'Guinea': 'GNF', // Guinean Franc
+  'Guinea-Bissau': 'XOF', // West African CFA franc
+  'Liberia': 'LRD', // Liberian Dollar
+  'Sierra Leone': 'SLL', // Sierra Leonean Leone
+  'Burkina Faso': 'XOF', // West African CFA franc
+  'Central African Rep.': 'XAF', // Central African CFA franc
+  'Congo': 'XAF', // Central African CFA franc
+  'Gabon': 'XAF', // Central African CFA franc
+  'Eq. Guinea': 'XAF', // Central African CFA franc
+  'Zambia': 'ZMW', // Zambian Kwacha
+  'Malawi': 'MWK', // Malawian Kwacha
+  'Mozambique': 'MZN', // Mozambican Metical
+  'eSwatini': 'SZL', // Swazi Lilangeni
+  'Angola': 'AOA', // Angolan Kwanza
+  'Burundi': 'BIF', // Burundian Franc
+  'Israel': 'ILS', // Israeli New Shekel
+  'Lebanon': 'LBP', // Lebanese Pound
+  'Madagascar': 'MGA', // Malagasy Ariary
+  'Palestine': 'ILS', // Israeli New Shekel
+  'Gambia': 'GMD', // Gambian Dalasi
+  'Tunisia': 'TND', // Tunisian Dinar
+  'Algeria': 'DZD', // Algerian Dinar
+  'Slovakia': 'EUR', // Euro
+  'Trinidad and Tobago': 'TTD',
+  'S. Sudan': 'SSP',
+  'Greenland': 'DKK',
+  'Fr. S. Antarctic Lands': null, // no official currency, research station uses various currencies
+  'Timor-Leste': 'USD',
+  'South Africa': 'ZAR',
+  'Lesotho': 'LSL',
+  'Mexico': 'MXN',
+  'Panama': 'PAB',
+  'Costa Rica': 'CRC',
+  'Nicaragua': 'NIO',
+  'Honduras': 'HNL',
+  'El Salvador': 'USD',
+  'Guatemala': 'GTQ',
+  'Belize': 'BZD',
+  'Puerto Rico': 'USD',
+  'Jamaica': 'JMD',
+  'Cuba': 'CUP',
+  'Zimbabwe': 'ZWL',
+  'Botswana': 'BWP',
+  'Namibia': 'NAD',
+  'Senegal': 'XOF',
+  'Mali': 'XOF',
+  'Mauritania': 'MRU',
+  'Fiji': 'FJD', // Fijian dollar
+  'Tanzania': 'TZS', // Tanzanian shilling
+  'W. Sahara': 'MAD', // Moroccan Dirham
+  'Kazakhstan': 'KZT', // Kazakhstani tenge
+  'Uzbekistan': 'UZS', // Uzbekistani soʻm
+  'Papua New Guinea': 'PGK', // Papua New Guinean kina
+  'Indonesia': 'IDR', // Indonesian rupiah
+  'Dem. Rep. Congo': 'CDF', // Congolese franc
+  'Somalia': 'SOS', // Somali shilling
+  'Kenya': 'KES', // Kenyan shilling
+  'Sudan': 'SDG', // Sudanese pound
+  'Chad': 'XAF', // Central African CFA franc
+  'Haiti': 'HTG', // Haitian gourde
+  'Dominican Rep.': 'DOP', // Dominican peso
+  'Bahamas': 'BSD', // Bahamian dollar
+  'Czechia': 'CZK', // Czech korun
+};
+
+d3.json("https://unpkg.com/world-atlas@2/countries-110m.json").then(function(world) {
+    var countries = topojson.feature(world, world.objects.countries).features;
+
+    fetch(`${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/5a18964394c03fc2da032a8c/latest/USD`)
+        .then(response => response.json())
+        .then(data => {
+            var rates = data.conversion_rates;
+            color.domain(d3.extent(Object.values(rates)));  // Set the color domain based on rates
+
+            countries.forEach(country => {
+                let currencyCode = countryToCurrency[country.properties.name];
+                if (currencyCode) {
+                    country.rate = rates[currencyCode];
+                } else {
+                    console.warn(`No currency mapping found for country: ${country.properties.name}`);
+                }
+            });
+
+            // Draw world map
+            svg.selectAll(".country")
+                .data(countries)
+                .enter().append("path")
+                .attr("class", "country")
+                .attr("d", path)
+                .attr("fill", function(d) { 
+                    return d.rate ? color(d.rate) : 'gray';  // Use the rate to color the country
+                })
+                .on("mouseover", function (event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", 0.9);
+                    tooltip.html(`${d.properties.name}: ${d.rate || "No data"}`)
+                        .style("left", (event.pageX) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function (d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
+        })
+        .catch(error => console.log('Error:', error));
+});
+
+
+document.getElementById('submit-btn').addEventListener('click', function() {
+  let currency = document.getElementById('currency-select').value;
+  let date = document.getElementById('date-input').value;
+
+  // Convert date to required format: 'YEAR/MONTH/DAY'
+  let formattedDate = date ? new Date(date).toISOString().split('T')[0].replace(/-/g, '/') : '';
+
+  updateVisualization(currency, formattedDate);
+});
+
+updateVisualization('USD', '');
+
+function updateVisualization(baseCurrency, date) {
+  let apiUrl = `${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/5a18964394c03fc2da032a8c/${date ? 'history' : 'latest'}/${baseCurrency}${date ? '/' + date : ''}`;
+
+  d3.json("https://unpkg.com/world-atlas@2/countries-110m.json").then(function(world) {
+    var countries = topojson.feature(world, world.objects.countries).features;
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        var rates = data.conversion_rates;
+        
+        // Define a color scale using d3.scaleOrdinal()
+        // The range of colors used is d3's built-in 'schemeCategory10', but you can adjust this as desired
+        var color = d3.scaleOrdinal()
+                      .domain(countries.map(country => country.properties.name))  // Use the country names as the domain
+                      .range(d3.schemeCategory10);  // Use the 10-category color scheme
+
+        countries.forEach(country => {
+          let currencyCode = countryToCurrency[country.properties.name];
+          if (currencyCode) {
+            country.rate = rates[currencyCode];
+          } else {
+            console.warn(`No currency mapping found for country: ${country.properties.name}`);
+          }
+        });
+
+        // Clear existing visualization
+        svg.selectAll("*").remove();
+
+        // Draw world map
+        svg.selectAll(".country")
+          .data(countries)
+          .enter().append("path")
+          .attr("class", "country")
+          .attr("d", path)
+          .attr("fill", function(d) { 
+            return color(d.properties.name);  // Use the color scale to assign a unique color to each country
+          })
+          .on("mouseover", function (event, d) {
+            tooltip.transition()
+              .duration(200)
+              .style("opacity", 0.9);
+            tooltip.html(`${d.properties.name}: ${d.rate || "No data"}`)
+              .style("left", (event.pageX) + "px")
+              .style("top", (event.pageY - 28) + "px");
+          })
+          .on("mouseout", function (d) {
+            tooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
+          });
+      })
+      .catch(error => console.log('Error:', error));
+  });
 }
 
-function renderChart(data, baseCurrency) {
-  const currencies = Object.keys(data);
-  const rates = Object.values(data);
-
-  const chartData = {
-    labels: currencies,
-    datasets: [
-      {
-        label: `Exchange Rates against ${baseCurrency}`,
-        data: rates,
-        backgroundColor: "yellow",
-        borderWidth: 1 / 10,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        beginAtZero: true,
-      },
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
-
-  const existingChart = chartCanvas.chart;
-  console.log(chartCanvas);
-  if (existingChart) {
-    existingChart.data = chartData;
-    existingChart.options = chartOptions;
-    existingChart.update();
-  } else {
-    new Chart(chartCanvas, {
-      type: "bar",
-      data: chartData,
-      options: chartOptions,
-    });
-  }
-}
-
-async function updateChart() {
-  const baseCurrency = document.getElementById("currency-pair").value;
-  const startDate = document.getElementById("start-date").value;
-  const endDate = document.getElementById("end-date").value;
-
-  if (startDate >= endDate) {
-    console.error("Start date must be before end date.");
-    return;
-  }
-
-  const data = await fetchExchangeRatesWithTimeframe(
-    baseCurrency,
-    startDate,
-    endDate
-  );
-
-  if (data) {
-    renderChart(data, baseCurrency);
-  } else {
-    console.error("Failed to fetch data.");
-  }
-}
-
-function selectBase() {
-  const baseCurrency = document.getElementById("select-base").value;
-  updateChartWithBaseCurrency(baseCurrency);
-}
-
-async function updateChartWithBaseCurrency(baseCurrency) {
-  const startDate = document.getElementById("start-date").value;
-  const endDate = document.getElementById("end-date").value;
-
-  if (startDate >= endDate) {
-    console.error("Start date must be before end date.");
-    return;
-  }
-
-  const data = await fetchExchangeRatesWithTimeframe(baseCurrency, startDate, endDate);
-
-  if (data) {
-    renderChart(data, baseCurrency);
-  } else {
-    console.error("Failed to fetch data.");
-  }
-}
-
-// async function fetchExchangeRatesWithTimeframe(
-//   baseCurrency,
-//   startDate,
-//   endDate
-// ) {
-//   try {
-//     const response = await fetch(
-//       `https://v6.exchangerate-api.com/v6/${apiKey}/history/${baseCurrency}/${startDate}/${endDate}`
-//     );
-//     const data = await response.json();
-//     return data.rates;
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     return null;
-//   }
-// }
 
 
-async function fetchExchangeRatesWithTimeframe(baseCurrency, startDate, endDate) {
-  try {
-    // const response = await fetch(`${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/${apiKey}/history/${baseCurrency}/${startDate}/${endDate}`);
-    const response = await fetch(`${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/${apiKey}/history/USD/2022/12/11`);
-    const data = await response.json();
-    console.log(data);
-    return data.conversion_rates;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return null;
-  }
-}
 
-function calculateMovingAverage(data, period) {
-  const movingAverages = [];
-  for (let i = period - 1; i < data.length; i++) {
-    const sum = data
-      .slice(i - period + 1, i + 1)
-      .reduce((acc, rate) => acc + rate, 0);
-    const average = sum / period;
-    movingAverages.push(average);
-  }
-  return movingAverages;
-}
 
-// Entry point - fetch data and render the chart
-async function startApp() {
-  const baseCurrency = "USD";
-  const data = await fetchExchangeRates(baseCurrency);
 
-  if (data) {
-    renderChart(data, baseCurrency);
-  } else {
-    console.error("Failed to fetch data.");
-  }
+
+
+
+  // Music
+
   const music = new Music();
 
   const nextMusicButton = document.getElementById('next-music');
@@ -177,7 +355,7 @@ async function startApp() {
   previousMusicButton.addEventListener('click', () => {
     music.previousMusic();
   });
-}
+
 
 function showAboutModal() {
   const modalContainer = document.getElementById('modal-container');
@@ -213,76 +391,17 @@ sessionCloseButton.addEventListener('click', hideSessionModal);
 
 
 
+
+
+
 //language
 // Define an object with language-specific content
 const languageContent = {
   en: {
       aboutMeHead: "About Me",
-      // aboutMe: "Hello! I'm Farivar Amiri, and I am a developer and financial enthusiast. 
-      // I created this project, Forex Data Visualization by F.A Financial CORP, to combine my interests 
-      // in finance and web development. 
-      // With a background in both fields, I aim to provide an interactive and informative 
-      // experience for traders and anyone interested in Forex exchange rates.
-      // <br>
-      // As a developer, I always strive to build user-friendly and visually appealing web applications. 
-      // This project has given me the opportunity to leverage my skills in HTML, CSS, JavaScript,
-      //  and data visualization libraries like Chart.js to create an engaging Forex data visualization tool.
-      //  I am continually working on enhancing the project and incorporating new features to make it more valuable for users.</p>",
+      // aboutMe: "Hello!
       projectInfoHead: "Project Info",
-      // projectInfo: "Project Name: Forex Data Visualization by F.A Financial CORP <br>
-      // Version: 1.0 beta (people like this kind of name, they think it will be something big soon :-)) <br>
-      // <br>
-      // <br>
-      // Description: <br>
-      // Forex Data Visualization by F.A Financial CORP is a web-based 
-      // application that allows users to visualize historical exchange rates for various currency pairs. <br>
-      //  The project provides traders and financial enthusiasts with an 
-      //  interactive chart to analyze and compare currency trends over specific time frames.
-      //   It allows users to select different currency pairs, set start and end dates for analysis, 
-      //   and even calculate moving averages for better insights into the market. <br>
-      //  <br>
-      //  <br>
-      // Key Features: <br>
-      // <br>
-      // Forex Exchange Rate Chart: 
-      // The application displays a bar chart with exchange rates of selected currency pairs against a base currency,
-      //  providing a clear view of the currency market trends. <br>
-      // <br>
-      // Date Range Selection:
-      //  Users can specify start and end dates to view historical exchange rate data for specific time frames. <br>
-      // <br>
-      // Moving Average Calculation: 
-      // The project includes a feature to calculate moving averages for the selected currency pairs,
-      //  aiding users in identifying potential trends and patterns. <br>
-      // <br>
-      // Music Player:
-      //  For a more enjoyable experience, 
-      //  the project incorporates a music player that allows users to play and pause background music. <br>
-      // <br>
-      // Responsive Design: 
-      // The application is designed to be responsive,
-      //  ensuring a seamless experience on various devices, including desktops, tablets, and mobile phones. <br>
-      // <br>
-      // Future Enhancements: <br>
-      // As the project evolves, 
-      // I plan to introduce additional features and improvements to enhance its functionality and user experience.
-      //  Some of the future enhancements include: <br>
-  
-      // Live Forex Data:
-      //  Implementing real-time exchange rate data to enable users to analyze the most up-to-date market trends. <br>
-      
-      // Additional Technical Indicators: 
-      // Introducing more technical indicators to aid traders in making informed decisions. <br>
-      
-      // User Accounts: 
-      // Creating user accounts to save preferences and customizations. <br>
-      
-      // User-Friendly Interface: 
-      // Continuously refining the user interface for easier navigation and interaction. <br>
-      
-      // I hope you find this project helpful and insightful for your Forex analysis needs.
-      //  Your feedback and suggestions are always welcome as I work to make this project even better! 
-      //  Thank you for visiting "Forex Data Visualization by F.A Financial CORP."",
+      // projectInfo: "Project Name
       fdvFd: "Forex Data Visualization by F.A Financial Department",
       tradingSession: "Forex Trading Sessions",
       welcome: "Welcome Trader",
@@ -297,71 +416,9 @@ const languageContent = {
   },
   fa: {
       aboutMeHead: "درباره ی من",
-      // aboutMe: "Hello! I'm Farivar Amiri, and I am a developer and financial enthusiast. 
-      // I created this project, Forex Data Visualization by F.A Financial CORP, to combine my interests 
-      // in finance and web development. 
-      // With a background in both fields, I aim to provide an interactive and informative 
-      // experience for traders and anyone interested in Forex exchange rates.
-      // <br>
-      // As a developer, I always strive to build user-friendly and visually appealing web applications. 
-      // This project has given me the opportunity to leverage my skills in HTML, CSS, JavaScript,
-      //  and data visualization libraries like Chart.js to create an engaging Forex data visualization tool.
-      //  I am continually working on enhancing the project and incorporating new features to make it more valuable for users.</p>",
+      // aboutMe: "Hello!
       projectInfoHead: "اطلاعات پروژه",
-      // projectInfo: "Project Name: Forex Data Visualization by F.A Financial CORP <br>
-      // Version: 1.0 beta (people like this kind of name, they think it will be something big soon :-)) <br>
-      // <br>
-      // <br>
-      // Description: <br>
-      // Forex Data Visualization by F.A Financial CORP is a web-based 
-      // application that allows users to visualize historical exchange rates for various currency pairs. <br>
-      //  The project provides traders and financial enthusiasts with an 
-      //  interactive chart to analyze and compare currency trends over specific time frames.
-      //   It allows users to select different currency pairs, set start and end dates for analysis, 
-      //   and even calculate moving averages for better insights into the market. <br>
-      //  <br>
-      //  <br>
-      // Key Features: <br>
-      // <br>
-      // Forex Exchange Rate Chart: 
-      // The application displays a bar chart with exchange rates of selected currency pairs against a base currency,
-      //  providing a clear view of the currency market trends. <br>
-      // <br>
-      // Date Range Selection:
-      //  Users can specify start and end dates to view historical exchange rate data for specific time frames. <br>
-      // <br>
-      // Moving Average Calculation: 
-      // The project includes a feature to calculate moving averages for the selected currency pairs,
-      //  aiding users in identifying potential trends and patterns. <br>
-      // <br>
-      // Music Player:
-      //  For a more enjoyable experience, 
-      //  the project incorporates a music player that allows users to play and pause background music. <br>
-      // <br>
-      // Responsive Design: 
-      // The application is designed to be responsive,
-      //  ensuring a seamless experience on various devices, including desktops, tablets, and mobile phones. <br>
-      // <br>
-      // Future Enhancements: <br>
-      // As the project evolves, 
-      // I plan to introduce additional features and improvements to enhance its functionality and user experience.
-      //  Some of the future enhancements include: <br>
-  
-      // Live Forex Data:
-      //  Implementing real-time exchange rate data to enable users to analyze the most up-to-date market trends. <br>
-      
-      // Additional Technical Indicators: 
-      // Introducing more technical indicators to aid traders in making informed decisions. <br>
-      
-      // User Accounts: 
-      // Creating user accounts to save preferences and customizations. <br>
-      
-      // User-Friendly Interface: 
-      // Continuously refining the user interface for easier navigation and interaction. <br>
-      
-      // I hope you find this project helpful and insightful for your Forex analysis needs.
-      //  Your feedback and suggestions are always welcome as I work to make this project even better! 
-      //  Thank you for visiting "Forex Data Visualization by F.A Financial CORP."",
+      // projectInfo: "Project Name
       fdvFd: "تصویرسازی داده های فارکس توسط بخش مالی ف.ا",
       tradingSession: "دوره های معاملاتی فارکس",
       welcome: "درود بر شما",
@@ -416,9 +473,3 @@ function toggleLanguage() {
 const languageToggle = document.getElementById('language-toggle');
 languageToggle.addEventListener('click', toggleLanguage);
 
-
-// Call the startApp function when the page loads
-window.selectBase = selectBase;
-window.calculateMovingAverage = calculateMovingAverage;
-window.updateChart = updateChart;
-window.onload = startApp;
