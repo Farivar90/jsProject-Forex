@@ -288,14 +288,14 @@ function updateVisualization(baseCurrency, date) {
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        var rates = data.conversion_rates;
-        
+        let rates = data.conversion_rates || data.historical;;
         // Define a color scale using d3.scaleOrdinal()
         // The range of colors used is d3's built-in 'schemeCategory10', but you can adjust this as desired
-        var color = d3.scaleOrdinal()
-                      .domain(countries.map(country => country.properties.name))  // Use the country names as the domain
-                      .range(d3.schemeCategory10);  // Use the 10-category color scheme
-
+        let color = d3.scaleOrdinal()
+        .domain(countries.map(country => country.properties.name))  // Use the country names as the domain
+        .range(d3.schemeCategory10);  // Use the 10-category color scheme
+        
+        color.domain(d3.extent(Object.values(rates)));  // Set the color domain based on rates
         countries.forEach(country => {
           let currencyCode = countryToCurrency[country.properties.name];
           if (currencyCode) {
@@ -393,13 +393,72 @@ function updateVisualization(baseCurrency, date) {
 // });
 
 
+// async function fetchExchangeRates(date) {
 
+//   try {
+
+//     let formattedDate = date.toISOString().split('T')[0].replace(/-/g, '/');
+    
+//     let apiUrl = `${backendServerUrl}/?url=https://v6.exchangerate-api.com/v6/5a18964394c03fc2da032a8c/${formattedDate}`;
+
+//     const response = await fetch(apiUrl);
+
+//     const data = await response.json();
+
+//     return data.conversion_rates;
+
+//   } catch (error) {
+
+//     console.log('Error fetching exchange rates:', error);
+    
+//     return {}; // Return an empty object to handle missing data
+
+//   }
+
+// }
+
+// // Add click handler for change button
+// const changeButton = document.getElementById('change');
+// changeButton.addEventListener('click', showChange);
+
+// // Calculate percentage change 
+// function calculatePercentChange(current, previous) {
+//   return ((current - previous) / previous) * 100;
+// }
+
+// // Get color based on percent change
+// function getColor(percentChange) {
+//   if(percentChange > 0) return 'green';
+//   if(percentChange < 0) return 'red';
+//   return 'white';
+// }
+
+// // Show change from previous day 
+// async function showChange() {
+
+//   // Get today and yesterday's rates
+//   const todayRates = await fetchExchangeRates(new Date()); 
+//   const yesterdayRates = await fetchExchangeRates(new Date(Date.now() - 86400000));
+
+//   // Update map
+//   svg.selectAll('.country')
+//     .style('fill', d => {
+//       const name = d.properties.name;
+//       const todayRate = todayRates[name];
+//       const yesterdayRate = yesterdayRates[name];
+//       if(todayRate && yesterdayRate) {
+//         const change = calculatePercentChange(todayRate, yesterdayRate);
+//         return getColor(change);  
+//       }
+//       return 'gray';
+//     });
+
+// }
 
 
 
 
   // Music
-
   const music = new Music();
 
   const nextMusicButton = document.getElementById('next-music');
@@ -413,6 +472,8 @@ function updateVisualization(baseCurrency, date) {
   });
 
 
+
+  //modal
 function showAboutModal() {
   const modalContainer = document.getElementById('modal-container');
   modalContainer.style.display = 'block';
@@ -451,12 +512,7 @@ sessionCloseButton.addEventListener('click', hideSessionModal);
 
 
 //language
-
-
 updateLanguageContent();
-// Function to toggle the language between English and another language (e.g., French)
-
-
 // Add event listener to the language button
 const languageToggle = document.getElementById('language-toggle');
 languageToggle.addEventListener('click', toggleLanguage);
