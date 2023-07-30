@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import Music  from "./scripts/music";
 
 const backendServerUrl = 'http://localhost:5001';
-let width = 1000;
+let width = 1400;
 let height = 800;
 let svg = d3.select("body")
     .append("svg")
@@ -335,6 +335,61 @@ function updateVisualization(baseCurrency, date) {
 }
 
 
+
+// // Create a color scale function
+// function colorScale(percentChange) {
+//   let r, g, b = 0;
+
+//   if (percentChange < 0) {
+//       r = 255;
+//       g = Math.round(255 * (percentChange / 100 + 1));
+//   } else {
+//       g = 255;
+//       r = Math.round(255 * ((100 - percentChange) / 100));
+//   }
+
+//   return "rgb(" + r + "," + g + "," + b + ")";
+// }
+
+// // Function to fetch exchange rates
+// async function fetchExchangeRates(date) {
+//   // API endpoint - replace with actual endpoint
+//   let url = "https://api.exchangeratesapi.io/" + date;
+
+//   let response = await fetch(url);
+//   let data = await response.json();
+
+//   return data.rates;
+// }
+
+// // Function to calculate percent change
+// function calculatePercentChange(current, previous) {
+//   return ((current - previous) / previous) * 100;
+// }
+
+// // Function to update map
+// async function updateMap(baseDate) {
+//   // Fetch exchange rates
+//   let currentRates = await fetchExchangeRates(baseDate);
+//   let previousRates = await fetchExchangeRates(new Date(baseDate.getTime() - 24 * 60 * 60 * 1000)); // day before
+
+//   // For each country, calculate the percent change and update color on the map
+//   for (let country in currentRates) {
+//       let percentChange = calculatePercentChange(currentRates[country], previousRates[country]);
+
+//       // Get country element on the map - replace with actual method
+//       let countryElement = document.getElementById(country);
+
+//       // Update color
+//       countryElement.style.fill = colorScale(percentChange);
+//   }
+// }
+
+// // Event listener for date selection
+// document.getElementById('date-picker').addEventListener('change', function() {
+//   let baseDate = new Date(this.value);
+//   updateMap(baseDate);
+// });
 
 
 

@@ -52,31 +52,13 @@ body {
   justify-content: center;
 }
 
-#update-elements {
-  color: greenyellow;
-  padding: 40px;
-}
-
-.currency-pair {
-  color: rgb(0, 0, 0);
-  font-size: 30px;
-  text-align: center;
-  font-family: serif;
-  padding: 30px;
-}
-
-#select-base {
+#currency-select, #date-input, #submit-btn {
   color: rgb(0, 0, 0);
   font-size: 20px;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   padding: 5px;
   background-color: green;
-}
-
-#moving-average-period {
-  color: greenyellow;
-  padding: 40px;
 }
 
 .base {
