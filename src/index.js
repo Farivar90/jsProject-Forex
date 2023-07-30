@@ -322,12 +322,12 @@ function colorScale(percentChange) {
   let r, g, b = 0;
   if (percentChange < 0) {
     r = 255;
-    g = Math.round(255 * (percentChange * 10 + 1));
-    b = Math.round(255 * (percentChange * 10 + 1));
+    g = Math.round(255 * (1+percentChange));
+    b = Math.round(255 * (1+percentChange));
   } else {
     g = 255;
-    r = Math.round(255 * ((100 - percentChange) * 10));
-    b = Math.round(255 * (percentChange * 10 + 1));
+    r = Math.round(255 * (1 - percentChange));
+    b = Math.round(255 * (1 - percentChange));
   }
 
   return "rgb(" + r + "," + g + "," + b + ")";
