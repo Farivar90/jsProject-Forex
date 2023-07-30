@@ -1,6 +1,7 @@
 import * as topojson from "topojson";
 import * as d3 from "d3";
 import Music  from "./scripts/music";
+import { updateLanguageContent, toggleLanguage } from "./scripts/language"
 
 const backendServerUrl = 'http://localhost:5001';
 let width = 1400;
@@ -450,76 +451,11 @@ sessionCloseButton.addEventListener('click', hideSessionModal);
 
 
 //language
-// Define an object with language-specific content
-const languageContent = {
-  en: {
-      aboutMeHead: "About Me",
-      // aboutMe: "Hello!
-      projectInfoHead: "Project Info",
-      // projectInfo: "Project Name
-      fdvFd: "Forex Data Visualization by F.A Financial Department",
-      tradingSession: "Forex Trading Sessions",
-      welcome: "Welcome Trader",
-      startDate: "Start Date:",
-      endDate: "End Date:",
-      cPair: "Select Currency Pair:",
-      updateChart: "Update",
-      movingAveragePeriod: "Moving Average Period:",
-      updateMovingAverage: "Update Moving Average",
-      selectBaseCurrency: "Select Base Currency:",
-      fMaC: "For more accurate charts which update every second please go to:",
-      refer: "Here, you can choose base currency and a date for historical data.The Base currency is USD and if you don't choose a date it will be today's data."
-  },
-  fa: {
-      aboutMeHead: "درباره ی من",
-      // aboutMe: "Hello!
-      projectInfoHead: "اطلاعات پروژه",
-      // projectInfo: "Project Name
-      fdvFd: "تصویرسازی داده های فارکس توسط بخش مالی ف.ا",
-      tradingSession: "دوره های معاملاتی فارکس",
-      welcome: "درود بر شما",
-      updateChart: "بروزرسانی ",
-      selectBaseCurrency: "انتخاب ارز پایه:",
-      fMaC: "برای دسترسی به چارت های دقیق تر که هر ثانیه تغییر میکنند به آدرس زیر بروید:",
-      refer: "در اینجا، می‌توانید ارز پایه و تاریخ را برای داده‌های تاریخی انتخاب کنید. ارز پایه USD است و اگر تاریخی را انتخاب نکنید، داده‌های امروز خواهد بود."
-  }
-};
 
 
-let currentLanguage = 'en';
-
-function updateLanguageContent() {
-  const lang = currentLanguage;
-  const content = languageContent[lang];
-
-  
-  document.getElementById('about-me-head').textContent = content.aboutMeHead;
-  document.getElementById('project-info-head').textContent = content.projectInfoHead;
-  document.getElementById('fdv-fd').textContent = content.fdvFd;
-  document.getElementById('welcome').textContent = content.welcome;
-  document.getElementById('trading-session').textContent = content.tradingSession;
-  // document.getElementById('start-d').textContent = content.startDate;
-  // document.getElementById('end-d').textContent = content.endDate;
-  // document.getElementById('c-pair').textContent = content.cPair;
-  document.getElementById('submit-btn').textContent = content.updateChart;
-  // document.getElementById('m-a-p').textContent = content.movingAveragePeriod;
-  // document.getElementById('u-m-a').textContent = content.updateMovingAverage;
-  document.getElementById('refer').textContent = content.refer;
-  document.getElementById('fmac').textContent = content.fMaC;
-}
-
-
-
-
-
+updateLanguageContent();
 // Function to toggle the language between English and another language (e.g., French)
-function toggleLanguage() {
-  // Change the current language between 'en' and 'fr' (you can add more languages as needed)
-  currentLanguage = currentLanguage === 'en' ? 'fa' : 'en';
 
-  // Update the language-specific content on the page
-  updateLanguageContent();
-}
 
 // Add event listener to the language button
 const languageToggle = document.getElementById('language-toggle');
