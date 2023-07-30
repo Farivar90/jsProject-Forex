@@ -463,11 +463,12 @@ const languageContent = {
       startDate: "Start Date:",
       endDate: "End Date:",
       cPair: "Select Currency Pair:",
-      updateChart: "Update Chart",
+      updateChart: "Update",
       movingAveragePeriod: "Moving Average Period:",
       updateMovingAverage: "Update Moving Average",
       selectBaseCurrency: "Select Base Currency:",
-      fMaC: "For more accurate charts which update every second please go to:"
+      fMaC: "For more accurate charts which update every second please go to:",
+      refer: "Here, you can choose base currency and a date for historical data.The Base currency is USD and if you don't choose a date it will be today's data."
   },
   fa: {
       aboutMeHead: "درباره ی من",
@@ -477,14 +478,10 @@ const languageContent = {
       fdvFd: "تصویرسازی داده های فارکس توسط بخش مالی ف.ا",
       tradingSession: "دوره های معاملاتی فارکس",
       welcome: "درود بر شما",
-      startDate: "تاریخ شروع:",
-      endDate: "تاریخ پایان:",
-      cPair: "انتخاب جفت ارز:",
-      updateChart: "بروزرسانی نمودار",
-      movingAveragePeriod: "دوره ی موینگ اوریج:",
-      updateMovingAverage: "بروزرسانی موینگ اوریج",
+      updateChart: "بروزرسانی ",
       selectBaseCurrency: "انتخاب ارز پایه:",
-      fMaC: "برای دسترسی به چارت های دقیق تر که هر ثانیه تغببر میکنند به آدرس زیر بروید:"
+      fMaC: "برای دسترسی به چارت های دقیق تر که هر ثانیه تغییر میکنند به آدرس زیر بروید:",
+      refer: "در اینجا، می‌توانید ارز پایه و تاریخ را برای داده‌های تاریخی انتخاب کنید. ارز پایه USD است و اگر تاریخی را انتخاب نکنید، داده‌های امروز خواهد بود."
   }
 };
 
@@ -501,13 +498,13 @@ function updateLanguageContent() {
   document.getElementById('fdv-fd').textContent = content.fdvFd;
   document.getElementById('welcome').textContent = content.welcome;
   document.getElementById('trading-session').textContent = content.tradingSession;
-  document.getElementById('start-d').textContent = content.startDate;
-  document.getElementById('end-d').textContent = content.endDate;
-  document.getElementById('c-pair').textContent = content.cPair;
-  document.getElementById('update-ch').textContent = content.updateChart;
-  document.getElementById('m-a-p').textContent = content.movingAveragePeriod;
-  document.getElementById('u-m-a').textContent = content.updateMovingAverage;
-  document.getElementById('s-b').textContent = content.selectBaseCurrency;
+  // document.getElementById('start-d').textContent = content.startDate;
+  // document.getElementById('end-d').textContent = content.endDate;
+  // document.getElementById('c-pair').textContent = content.cPair;
+  document.getElementById('submit-btn').textContent = content.updateChart;
+  // document.getElementById('m-a-p').textContent = content.movingAveragePeriod;
+  // document.getElementById('u-m-a').textContent = content.updateMovingAverage;
+  document.getElementById('refer').textContent = content.refer;
   document.getElementById('fmac').textContent = content.fMaC;
 }
 
