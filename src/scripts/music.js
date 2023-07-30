@@ -2,13 +2,14 @@ class Music {
     constructor() {
       this.currentSongIndex = 0;
       this.songs = [
-        new Audio('./src/songs/mix.mp3'),
-        new Audio('./src/songs/mix1.mp3'),
-        new Audio('./src/songs/mix2.mp3'),
-        new Audio('./src/songs/mix3.mp3'),
-        new Audio('./src/songs/mix4.mp3'),
-        new Audio('./src/songs/mix5.mp3'),
-        new Audio('./src/songs/mix6.mp3')
+        new Audio('./src/songs/80s 100 Hits - Volume 2 CD 1 TRACK 4 (320).mp3'),
+        new Audio('./src/songs/Blackstreet, Dr. Dre, Queen Pen - No Diggity.mp3'),
+        new Audio('./src/songs/Earth, Wind & Fire - Lets Groove.mp3'),
+        new Audio('./src/songs/Grover_Washington,_Jr_,_Bill_Withers_Just_the_Two_of_Us_feat_Bill.mp3'),
+        new Audio('./src/songs/Huey Lewis And The News - The Power Of Love.mp3'),
+        new Audio('./src/songs/Laugh.mp3'),
+        new Audio('./src/songs/Ryan Gosling, Emma Stone - City Of Stars.mp3'),
+        new Audio('./src/songs/The World We Knew CD 1 TRACK 2 (320).mp3')
       ];
       this.playing = false;
       this.toggle = document.getElementById('music-toggle');
