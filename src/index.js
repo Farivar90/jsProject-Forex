@@ -323,10 +323,12 @@ function colorScale(percentChange) {
   console.log(percentChange);
   if (percentChange < 0) {
     r = 255;
-    g = Math.round(255 * (percentChange * 10 + 1));
+    g = Math.round( (percentChange *  10 ));
+    b = Math.round((percentChange * 10));
   } else {
     g = 255;
-    r = Math.round(255 * ((100 - percentChange) * 10));
+    r = Math.round(((-percentChange) * 10));
+    b = Math.round((-percentChange * 10));
   }
 
   return "rgb(" + r + "," + g + "," + b + ")";
