@@ -206,7 +206,7 @@ h3{
   transition: color 0.5s ease-in-out;
 }
 
-.news{
+.news, #live-n{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -239,4 +239,23 @@ h4{
   border: 0px;
   border-radius: 8px;
   pointer-events: none;
+}
+
+#chart{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: aqua;
+  background-size: 100%;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }

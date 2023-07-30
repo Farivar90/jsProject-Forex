@@ -184,6 +184,7 @@
     
     <h2 id="welcome" >Welcome Trader</h2>
 
+    <h3 id="live-n">Live News</h3>
     <div class="news" >
       <iframe id="live-news" width="560" height="315" src="https://www.youtube.com/embed/nG0Kt1Xzk60" title="YouTube video player" frameborder="0"
        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -222,7 +223,7 @@
 
     <div>
       <h2 id="percentage-note">
-        Here, you can choose base currency and a date for historical data and you van see the change of the value by percentage.
+        Here, you can choose base currency and a date for historical data and you can see the change of the value by percentage.
       </h2>
     </div>
     <div class="base">
@@ -246,23 +247,24 @@
       <button id="change-p">Show Percentage</button>
     </div>
 
-
-    <div id="chart"> </div>
-      <script src="https://d3js.org/d3.v6.min.js"></script>
-      <style>
-        /* Add some basic styling */
-        .country {
+      <div id="chart"> 
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <style>
+          .country {
             stroke: #ffffff;
             stroke-width: 0.5px;
-        }
-      </style>
-          <script src="https://unpkg.com/topojson@3"></script> <!-- Add this line -->
-
-  
+            }
+        </style>
+        <script src="https://unpkg.com/topojson@3"></script>
+      </div>
+    
   </body>
 
   <footer>
-    
+    <div class="footer">
+      <p>© 2023 by F.A Financial Department. All rights reserved.</p>
+      <p>“Kidding. It’s just to show off my abilities. Don’t take it so seriously :-)”.</p>
+    </div>
   </footer>
 
 </html>

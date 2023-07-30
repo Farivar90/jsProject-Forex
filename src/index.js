@@ -4,7 +4,7 @@ import Music  from "./scripts/music";
 import { updateLanguageContent, toggleLanguage } from "./scripts/language"
 
 const backendServerUrl = 'http://localhost:5001';
-let width = 1400;
+let width = 1200;
 let height = 800;
 let svg = d3.select("body")
     .append("svg")

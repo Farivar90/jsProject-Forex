@@ -16,8 +16,9 @@ const languageContent = {
       selectBaseCurrency: "Select Base Currency:",
       fMaC: "For more accurate charts which update every second please go to:",
       refer: "Here, you can choose base currency and a date for historical data.The Base currency is USD and if you don't choose a date it will be today's data.",
-      percentageNote: "Here, you can choose base currency and a date for historical data and you van see the change of the value by percentage.",
-      changeP: "Show Percentage"
+      percentageNote: "Here, you can choose base currency and a date for historical data and you can see the change of the value by percentage.",
+      changeP: "Show Percentage",
+      liveN: "Live News"
   },
   fa: {
       aboutMeHead: "درباره ی من",
@@ -32,7 +33,8 @@ const languageContent = {
       fMaC: "برای دسترسی به چارت های دقیق تر که هر ثانیه تغییر میکنند به آدرس زیر بروید:",
       refer: "در اینجا، می‌توانید ارز پایه و تاریخ را برای داده‌های تاریخی انتخاب کنید. ارز پایه USD است و اگر تاریخی را انتخاب نکنید، داده‌های امروز خواهد بود.",
       percentageNote: "در اینجا، می توانید ارز پایه و تاریخ را برای داده های تاریخی انتخاب کنید و تغییر مقدار را بر حسب درصد مشاهده کنید.",
-      changeP: "نمایش درصد"
+      changeP: "نمایش درصد",
+      liveN: "اخبار زنده"
   }
 };
 
@@ -51,7 +53,7 @@ function updateLanguageContent() {
   document.getElementById('trading-session').textContent = content.tradingSession;
   document.getElementById('percentage-note').textContent = content.percentageNote;
   document.getElementById('change-p').textContent = content.changeP;
-  // document.getElementById('c-pair').textContent = content.cPair;
+  document.getElementById('live-n').textContent = content.liveN;
   document.getElementById('submit-btn').textContent = content.updateChart;
   // document.getElementById('m-a-p').textContent = content.movingAveragePeriod;
   // document.getElementById('u-m-a').textContent = content.updateMovingAverage;
