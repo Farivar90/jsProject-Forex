@@ -320,15 +320,14 @@ function updateVisualization(baseCurrency, date) {
 // Create a color scale function
 function colorScale(percentChange) {
   let r, g, b = 0;
-  console.log(percentChange);
   if (percentChange < 0) {
     r = 255;
-    g = Math.round( (percentChange *  10 ));
-    b = Math.round((percentChange * 10));
+    g = Math.round(255 * (percentChange * 10 + 1));
+    b = Math.round(255 * (percentChange * 10 + 1));
   } else {
     g = 255;
-    r = Math.round(((-percentChange) * 10));
-    b = Math.round((-percentChange * 10));
+    r = Math.round(255 * ((100 - percentChange) * 10));
+    b = Math.round(255 * (percentChange * 10 + 1));
   }
 
   return "rgb(" + r + "," + g + "," + b + ")";
@@ -402,24 +401,13 @@ async function updateMap(baseCurrency, baseDate) {
   });
 }
 
-document.getElementById('date-picker').addEventListener('change', function() {
-  let baseDate = new Date(this.value);
-  let currencyB = document.getElementById('currency-base').value;
-  updateMap(currencyB, baseDate); 
+
+document.getElementById('change-p').addEventListener('click', function() {
+  let currencyB = document.getElementById('currency-base').value || 'USD';
+  let baseDateValue = document.getElementById('date-picker').value;
+  let baseDate = baseDateValue ? new Date(baseDateValue) : new Date();
+  updateMap(currencyB, baseDate);
 });
-
-// document.getElementById('change').addEventListener('click', function() {
-//   let currencyB = document.getElementById('currency-base').value;
-//   let baseDate = document.getElementById('date-picker').value;
-
-//   // Convert date to required format: 'YEAR/MONTH/DAY'
-//   let formattedDate = baseDate ? new Date(baseDate).toISOString().split('T')[0].replace(/-/g, '/') : '';
-
-//   updateMap(currencyB, formattedDate);
-// });
-
-// updateMap('USD', '');
-
 
 
 
