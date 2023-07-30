@@ -52,7 +52,7 @@ body {
   justify-content: center;
 }
 
-#currency-select, #date-input, #submit-btn {
+#currency-select, #date-input, #submit-btn, #date-picker, #change, #currency-base {
   color: rgb(0, 0, 0);
   font-size: 20px;
   text-align: center;
