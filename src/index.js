@@ -468,53 +468,52 @@ languageToggle.addEventListener('click', toggleLanguage);
 
 
 
-// //ins
-// document.addEventListener("DOMContentLoaded", function() {
-//   let instructionPopup = document.getElementById("instructions-popup");
-//   let closeButton = document.getElementById("close-ins");
-//   let showInstructionsButton = document.getElementById("show-instructions");
+//ins
+document.addEventListener("DOMContentLoaded", function() {
+  let instructionPopup = document.getElementById("instructions-popup");
+  let closeButton = document.getElementById("close-ins");
+  let showInstructionsButton = document.getElementById("show-ins-b");
 
-//   if (showInstructionsButton) {
-//     showInstructionsButton.addEventListener("click", function() {
-//       if (instructionPopup) {
-//         instructionPopup.classList.remove("hidden");
-//       }
-//     });
-//   }
+  
+  function hideIns() {
+    const instructionPopup = document.getElementById("instructions-popup");
+    instructionPopup.style.display = 'none';
+  }
 
-//   if (closeButton) {
-//     closeButton.addEventListener("click", function() {
-//       console.log("Close button clicked!");
-//       hideIns()
-//       if (instructionPopup) {
-//         instructionPopup.classList.add("hidden");
-//       }
-//     });
-//   }
+  if (showInstructionsButton) {
+    showInstructionsButton.addEventListener("click", function() {
+      if (instructionPopup) {
+        instructionPopup.classList.remove("hidden");
+      }
+    });
+  }
 
-//   function hideIns() {
-//     const ins = document.getElementById('show-instructions');
-//     ins.style.display = 'none';
-//   }
+  if (closeButton) {
+    closeButton.addEventListener("click", function() {
+      hideIns()
+    });
+  }
 
-//   let currentPage = 1;
-//   let nextButton = document.getElementById("next");
 
-//   if (nextButton) {
-//     nextButton.addEventListener("click", function() {
-//       let currentPageDiv = document.getElementById(`page-${currentPage}`);
-//       if (currentPageDiv) {
-//         currentPageDiv.classList.add("hidden");
-//       }
-//       currentPage++;
-//       let nextPageDiv = document.getElementById(`page-${currentPage}`);
-//       if (nextPageDiv) {
-//         nextPageDiv.classList.remove("hidden");
-//       }
-//       if (currentPage >= 6) {
-//         // Hide the next button on the last page
-//         nextButton.classList.add("hidden");
-//       }
-//     });
-//   }
-// });
+
+  let currentPage = 1;
+  let nextButton = document.getElementById("next");
+
+  if (nextButton) {
+    nextButton.addEventListener("click", function() {
+      let currentPageDiv = document.getElementById(`page-${currentPage}`);
+      if (currentPageDiv) {
+        currentPageDiv.classList.add("hidden");
+      }
+      currentPage++;
+      let nextPageDiv = document.getElementById(`page-${currentPage}`);
+      if (nextPageDiv) {
+        nextPageDiv.classList.remove("hidden");
+      }
+      if (currentPage >= 6) {
+        // Hide the next button on the last page
+        nextButton.classList.add("hidden");
+      }
+    });
+  }
+});
