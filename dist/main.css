@@ -248,3 +248,91 @@ h4 {
   bottom: 0;
   width: 100%;
 }
+
+.hidden {
+  display: none;
+}
+
+#instructions-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#next,
+#close-ins {
+  margin: 10px;
+}
+
+#ins1 {
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#ins2 {
+  height: 150px;
+}
+
+#ins2-5 {
+  height: 50px;
+}
+
+#ins3 {
+  height: 200px;
+}
+
+#ins4 {
+  height: 200px;
+}
+
+#ins4-5 {
+  height: 100px;
+}
+
+#ins5 {
+  height: 200px;
+}
+
+#ins5-5 {
+  height: 100px;
+}
+
+#ins6 {
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#show-ins-b {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#show-ins-b:hover {
+  background-color: rgb(21, 87, 3);
+  transition: color 0.5s ease-in-out;
+}

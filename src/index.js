@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import Music  from "./scripts/music";
 import { updateLanguageContent, toggleLanguage } from "./scripts/language"
 
-const backendServerUrl = 'http://localhost:5001';
+const backendServerUrl = 'https://forex-dv-proxy-server.onrender.com';
 let width = 1200;
 let height = 800;
 let svg = d3.select("body")
@@ -460,13 +460,61 @@ const sessionCloseButton = document.getElementById('session-close-button');
 sessionCloseButton.addEventListener('click', hideSessionModal);
 
 
-
-
-
-
 //language
 updateLanguageContent();
 // Add event listener to the language button
 const languageToggle = document.getElementById('language-toggle');
 languageToggle.addEventListener('click', toggleLanguage);
 
+
+
+// //ins
+// document.addEventListener("DOMContentLoaded", function() {
+//   let instructionPopup = document.getElementById("instructions-popup");
+//   let closeButton = document.getElementById("close-ins");
+//   let showInstructionsButton = document.getElementById("show-instructions");
+
+//   if (showInstructionsButton) {
+//     showInstructionsButton.addEventListener("click", function() {
+//       if (instructionPopup) {
+//         instructionPopup.classList.remove("hidden");
+//       }
+//     });
+//   }
+
+//   if (closeButton) {
+//     closeButton.addEventListener("click", function() {
+//       console.log("Close button clicked!");
+//       hideIns()
+//       if (instructionPopup) {
+//         instructionPopup.classList.add("hidden");
+//       }
+//     });
+//   }
+
+//   function hideIns() {
+//     const ins = document.getElementById('show-instructions');
+//     ins.style.display = 'none';
+//   }
+
+//   let currentPage = 1;
+//   let nextButton = document.getElementById("next");
+
+//   if (nextButton) {
+//     nextButton.addEventListener("click", function() {
+//       let currentPageDiv = document.getElementById(`page-${currentPage}`);
+//       if (currentPageDiv) {
+//         currentPageDiv.classList.add("hidden");
+//       }
+//       currentPage++;
+//       let nextPageDiv = document.getElementById(`page-${currentPage}`);
+//       if (nextPageDiv) {
+//         nextPageDiv.classList.remove("hidden");
+//       }
+//       if (currentPage >= 6) {
+//         // Hide the next button on the last page
+//         nextButton.classList.add("hidden");
+//       }
+//     });
+//   }
+// });
