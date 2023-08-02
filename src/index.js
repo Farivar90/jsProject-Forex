@@ -2,6 +2,7 @@ import * as topojson from "topojson";
 import * as d3 from "d3";
 import Music  from "./scripts/music";
 import { updateLanguageContent, toggleLanguage } from "./scripts/language"
+import { changeTheme } from "./scripts/theme"
 
 const backendServerUrl = 'https://forex-dv-proxy-server.onrender.com';
 let width = 1200;
@@ -516,4 +517,15 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
+});
+
+// Theme
+
+document.getElementById('theme-selector').addEventListener('change', function() {
+  changeTheme(this.value);
+  // changeTheme('dark');
+});
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  changeTheme('dark');
 });
