@@ -526,6 +526,6 @@ document.getElementById('theme-selector').addEventListener('change', function() 
   // changeTheme('dark');
 });
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
   changeTheme('dark');
 });
